@@ -11,8 +11,20 @@ import com.michael.project.domain.Task;
  */
 public class TaskDAOImpl implements ITaskDAO {
 
+    /**
+     * 根据主键查询任务
+     *
+     * @param taskId 主键
+     * @return 任务
+     */
     @Override
     public Task findById(long taskId) {
+        final Task task = new Task();
+
+        String sql = "select * from task where task_id = ?";
+        Object[] params = new Object[]{taskId};
+
+
         return null;
     }
 }
