@@ -57,7 +57,7 @@ public class ConfigurationManager {
     public static Integer getInteger(String key) {
         String value = getProperty(key);
         try {
-            Integer.valueOf(value);
+            return Integer.valueOf(value);
         } catch (Exception e) {
             e.printStackTrace();
         }

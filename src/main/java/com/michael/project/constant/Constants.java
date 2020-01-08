@@ -14,7 +14,7 @@ public interface Constants {
     String JDBC_DRIVER = "jdbc.driver";
     String JDBC_DATASOURCE_SIZE = "jdbc.datasource.size";
     String JDBC_URL = "jdbc.url";
-    String JDBC_USER = "jdbc_user";
+    String JDBC_USER = "jdbc.user";
     String JDBC_PASSWORD = "jdbc.password";
     String JDBC_URL_PROD = "jdbc.url.prod";
     String JDBC_USER_PROD = "jdbc.user.prod";

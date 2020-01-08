@@ -1,8 +1,11 @@
-package com.michael.project.spark;
+package com.michael.project.spark.session;
 
 import com.alibaba.fastjson.JSONObject;
 import com.michael.project.conf.ConfigurationManager;
 import com.michael.project.constant.Constants;
+import com.michael.project.dao.ITaskDAO;
+import com.michael.project.dao.factory.DAOFactory;
+import com.michael.project.domain.Task;
 import com.michael.project.mock.MockData;
 import com.michael.project.util.ParamUtils;
 import org.apache.spark.SparkConf;
@@ -58,16 +61,25 @@ public class UserVisitSessionAnalyzeSpark {
         mockData(sc, sqlContext);
 
         // 创建需要使用的DAO组件
+        ITaskDAO taskDAO = DAOFactory.getTaskDAO();
 
         // 首先得查询出来指定的任务，并获取任务的查询参数
+        Long taskId = ParamUtils.getTaskIdFromArgs(args, Constants.SPARK_LOCAL_TASK_ID_SESSION);
+        if (taskId == null) {
+            return;
+        }
+        Task task = taskDAO.findById(taskId);
+        JSONObject taskParam = JSONObject.parseObject(task.getTaskParam());
 
         // 如果要进行session粒度的数据聚合
         // 首先要从user_visit_action表中，查询出来指定日期范围内的行为数据
-        JavaRDD<Row> actionRDD = getActionRDDByDateRange(sqlContext, null);
+        JavaRDD<Row> actionRDD = getActionRDDByDateRange(sqlContext, taskParam);
 
-        //
-
-        aggregateBySession(sqlContext, actionRDD);
+        // 首先，可以将行为数据，按照session_id进行groupByKey分组
+        // 此时的数据的粒度就是session粒度粒，然后呢，可以将session粒度的数据
+        // 与用户信息数据，进行join
+        // 然后就可以获取到session粒度的数据，同时呢，数据粒面还包含粒session对应的user的信息
+        JavaPairRDD<String, String> stringStringJavaPairRDD = aggregateBySession(sqlContext, actionRDD);
 
         sc.close();
     }

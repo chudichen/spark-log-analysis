@@ -43,6 +43,10 @@ public class ParamUtils {
      * @return 参数
      */
     public static String getParam(JSONObject jsonObject, String field) {
+        if (jsonObject == null || StringUtils.isEmpty(field)) {
+            return null;
+        }
+
         JSONArray jsonArray = jsonObject.getJSONArray(field);
         if(jsonArray != null && jsonArray.size() > 0) {
             return jsonArray.getString(0);
