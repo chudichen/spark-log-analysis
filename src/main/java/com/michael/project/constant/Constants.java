@@ -44,7 +44,7 @@ public interface Constants {
     String FIELD_CLICK_COUNT = "clickCount";
     String FIELD_ORDER_COUNT = "orderCount";
     String FIELD_PAY_COUNT = "payCount";
-    String FIELD_CATEGORY_ID = "categoryid";
+    String FIELD_CATEGORY_ID = "categoryId";
 
     String SESSION_COUNT = "session_count";
     String TIME_PERIOD_1s_3s = "1s_3s";
@@ -68,4 +68,19 @@ public interface Constants {
      */
     String PARAM_START_DATE = "startDate";
     String PARAM_END_DATE = "endDate";
+    String PARAM_START_AGE = "startAge";
+    String PARAM_END_AGE = "endAge";
+    String PARAM_PROFESSIONALS = "professionals";
+    String PARAM_CITIES = "cities";
+    String PARAM_SEX = "sex";
+    String PARAM_KEYWORDS = "keywords";
+    String PARAM_CATEGORY_IDS = "categoryIds";
+    String PARAM_TARGET_PAGE_FLOW = "targetPageFlow";
+
+    /**
+     * 符号常量
+     */
+    String STRING_EMPTY = "";
+    String STRING_EQUAL = "=";
+    String STRING_DELIMITER = "|";
 }
