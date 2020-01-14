@@ -17,4 +17,11 @@ public interface ITaskDAO {
      * @return 任务
      */
     Task findById(long taskId);
+
+    /**
+     * 通过taskId删除
+     *
+     * @param taskId 任务ID
+     */
+    void delete(long taskId);
 }

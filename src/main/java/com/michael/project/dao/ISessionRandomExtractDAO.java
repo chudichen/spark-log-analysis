@@ -17,4 +17,10 @@ public interface ISessionRandomExtractDAO {
      */
     void insert(SessionRandomExtract sessionRandomExtract);
 
+    /**
+     * 通过taskId删除
+     *
+     * @param taskId 任务ID
+     */
+    void delete(long taskId);
 }

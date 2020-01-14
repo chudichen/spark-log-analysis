@@ -22,7 +22,6 @@ import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.PairFlatMapFunction;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
@@ -611,7 +610,7 @@ public class UserVisitSessionAnalyzeSpark {
         // 第二步，使用按时间比例的随机抽取算法，计算出每天每小时要抽取session的索引
         // 将<yyyy-MM-dd_HH, count>格式的map，转换成<yyyy-MM-dd,<HH,count>>的格式
         Map<String, Map<String, Long>> dateHourCountMap =
-                new HashMap<String, Map<String, Long>>();
+                new HashMap<>();
 
         for(Map.Entry<String, Long> countEntry : countMap.entrySet()) {
             String dateHour = countEntry.getKey();
@@ -727,6 +726,7 @@ public class UserVisitSessionAnalyzeSpark {
                     sessionRandomExtract.setClickCategoryIds(StringUtils.getFieldFromConcatString(
                             sessionAggInfo, "\\|", Constants.FIELD_CLICK_CATEGORY_IDS));
 
+                    sessionRandomExtractDAO.delete(taskId);
                     sessionRandomExtractDAO.insert(sessionRandomExtract);
 
                     // 将sessionId加入list
@@ -761,6 +761,7 @@ public class UserVisitSessionAnalyzeSpark {
             sessionDetail.setPayProductIds(row.getString(11));
 
             ISessionDetailDAO sessionDetailDAO = DAOFactory.getSessionDetailDAO();
+            sessionDetailDAO.delete(taskId);
             sessionDetailDAO.insert(sessionDetail);
         });
     }

@@ -32,4 +32,14 @@ public class SessionRandomExtractDAOImpl implements ISessionRandomExtractDAO {
         JDBCHelper jdbcHelper = JDBCHelper.getInstance();
         jdbcHelper.executeUpdate(sql, params);
     }
+
+    @Override
+    public void delete(long taskId) {
+        String sql = "delete from session_random_extract where task_id = ?";
+        Object[] params = {taskId};
+
+        JDBCHelper jdbcHelper = JDBCHelper.getInstance();
+        jdbcHelper.executeUpdate(sql, params);
+    }
+
 }

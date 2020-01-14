@@ -49,4 +49,14 @@ public class TaskDAOImpl implements ITaskDAO {
         });
         return task;
     }
+
+    @Override
+    public void delete(long taskId) {
+        String sql = "delete from task where task_id = ?";
+        Object[] params = {taskId};
+
+        JDBCHelper jdbcHelper = JDBCHelper.getInstance();
+        jdbcHelper.executeUpdate(sql, params);
+    }
+
 }

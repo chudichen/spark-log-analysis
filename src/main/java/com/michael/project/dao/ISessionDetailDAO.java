@@ -17,4 +17,10 @@ public interface ISessionDetailDAO {
      */
     void insert(SessionDetail sessionDetail);
 
+    /**
+     * 通过taskId删除
+     *
+     * @param taskId 任务ID
+     */
+    void delete(long taskId);
 }

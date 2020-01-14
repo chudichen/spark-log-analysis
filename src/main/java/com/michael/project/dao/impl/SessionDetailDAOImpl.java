@@ -38,4 +38,13 @@ public class SessionDetailDAOImpl implements ISessionDetailDAO {
         JDBCHelper jdbcHelper = JDBCHelper.getInstance();
         jdbcHelper.executeUpdate(sql, params);
     }
+
+    @Override
+    public void delete(long taskId) {
+        String sql = "delete from session_detail where task_id = ?";
+        Object[] params = {taskId};
+
+        JDBCHelper jdbcHelper = JDBCHelper.getInstance();
+        jdbcHelper.executeUpdate(sql, params);
+    }
 }
