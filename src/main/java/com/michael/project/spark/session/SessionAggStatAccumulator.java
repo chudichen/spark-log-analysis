@@ -54,7 +54,7 @@ public class SessionAggStatAccumulator extends AccumulatorV2<String, String> {
 
     @Override
     public void reset() {
-        this.value = INIT_VALUE;
+        value = INIT_VALUE;
     }
 
     @Override
@@ -63,7 +63,14 @@ public class SessionAggStatAccumulator extends AccumulatorV2<String, String> {
             return;
         }
 
-
+        // 使用StringUtils工具类，从v1中，提取v2对应的值，并累加1
+        String oldValue = StringUtils.getFieldFromConcatString(value, "\\|", v);
+        if(oldValue != null) {
+            // 将范围区间原有的值，累加1
+            int newValue = Integer.parseInt(oldValue) + 1;
+            // 使用StringUtils工具类，将v1中，v2对应的值，设置成新的累加后的值
+            value = StringUtils.setFieldInConcatString(value, "\\|", v, String.valueOf(newValue));
+        }
     }
 
     @Override
@@ -73,6 +80,6 @@ public class SessionAggStatAccumulator extends AccumulatorV2<String, String> {
 
     @Override
     public String value() {
-        return this.value;
+        return value;
     }
 }

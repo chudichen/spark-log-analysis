@@ -16,4 +16,6 @@ public interface ISessionAggStatDAO {
      * @param sessionAggStat {@link SessionAggStat} 聚合统计结果
      */
     void insert(SessionAggStat sessionAggStat);
+
+    void delete(long taskId);
 }

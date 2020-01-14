@@ -43,4 +43,13 @@ public class SessionAggStatDAOImpl implements ISessionAggStatDAO {
         JDBCHelper jdbcHelper = JDBCHelper.getInstance();
         jdbcHelper.executeUpdate(sql, params);
     }
+
+    @Override
+    public void delete(long taskId) {
+        String sql = "delete from session_agg_stat where task_id = ?";
+        Object[] params = {taskId};
+
+        JDBCHelper jdbcHelper = JDBCHelper.getInstance();
+        jdbcHelper.executeUpdate(sql, params);
+    }
 }

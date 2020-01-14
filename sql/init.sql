@@ -7,7 +7,7 @@
 # 所以主要还是集中在spark上面，就不要花时间去做Hive ETL了。设计MySQL中的业务表的结构。
 
 # 第一表：session_aggr_stat表，存储第一个功能，session聚合统计的结果
-CREATE TABLE if not exists `session_aggr_stat` (
+CREATE TABLE if not exists `session_agg_stat` (
                                                    `task_id` int(11) NOT NULL,
                                                    `session_count` int(11) DEFAULT NULL,
                                                    `1s_3s` double DEFAULT NULL,

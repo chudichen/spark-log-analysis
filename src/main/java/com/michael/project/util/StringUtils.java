@@ -84,9 +84,35 @@ public class StringUtils {
         return null;
     }
 
+    /**
+     * 从拼接的字符串中给定字段设置值
+     *
+     * @param str 字符串
+     * @param delimiter 分隔符
+     * @param field 字段名
+     * @param newFieldValue 新的值
+     * @return 字段值
+     */
     public static String setFieldInConcatString(String str, String delimiter, String field, String newFieldValue) {
         String[] fields = str.split(delimiter);
-        return null;
-    }
 
+        for (int i = 0; i < fields.length; i++) {
+            String fieldName = fields[i].split("=")[0];
+            if (fieldName.equals(field)) {
+                String concatField = fieldName + "=" + newFieldValue;
+                fields[i] = concatField;
+                break;
+            }
+        }
+
+        StringBuilder buffer = new StringBuilder();
+        for (int i = 0; i < fields.length; i++) {
+            buffer.append(fields[i]);
+            if (i < fields.length - 1) {
+                buffer.append("|");
+            }
+        }
+
+        return buffer.toString();
+    }
 }
