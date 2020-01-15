@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class SessionDetail {
 
+    private Long id;
     private long taskId;
     private long userId;
     private String sessionId;

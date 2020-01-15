@@ -6,27 +6,28 @@
 # 在本项目中，我们所有的数据设计环节，只会涉及第二个，不会涉及第一个。因为我们为了突出课程重点，也就是spark。
 # 所以主要还是集中在spark上面，就不要花时间去做Hive ETL了。设计MySQL中的业务表的结构。
 
-# 第一表：session_aggr_stat表，存储第一个功能，session聚合统计的结果
+# 第一表：session_agg_stat表，存储第一个功能，session聚合统计的结果
 CREATE TABLE if not exists `session_agg_stat` (
-                                                   `task_id` int(11) NOT NULL,
-                                                   `session_count` int(11) DEFAULT NULL,
-                                                   `1s_3s` double DEFAULT NULL,
-                                                   `4s_6s` double DEFAULT NULL,
-                                                   `7s_9s` double DEFAULT NULL,
-                                                   `10s_30s` double DEFAULT NULL,
-                                                   `30s_60s` double DEFAULT NULL,
-                                                   `1m_3m` double DEFAULT NULL,
-                                                   `3m_10m` double DEFAULT NULL,
-                                                   `10m_30m` double DEFAULT NULL,
-                                                   `30m` double DEFAULT NULL,
-                                                   `1_3` double DEFAULT NULL,
-                                                   `4_6` double DEFAULT NULL,
-                                                   `7_9` double DEFAULT NULL,
-                                                   `10_30` double DEFAULT NULL,
-                                                   `30_60` double DEFAULT NULL,
-                                                   `60` double DEFAULT NULL,
-                                                   PRIMARY KEY (`task_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        `task_id` int(11) NOT NULL,
+        `session_count` int(11) DEFAULT NULL,
+        `1s_3s` double DEFAULT NULL,
+        `4s_6s` double DEFAULT NULL,
+        `7s_9s` double DEFAULT NULL,
+        `10s_30s` double DEFAULT NULL,
+        `30s_60s` double DEFAULT NULL,
+        `1m_3m` double DEFAULT NULL,
+        `3m_10m` double DEFAULT NULL,
+        `10m_30m` double DEFAULT NULL,
+        `30m` double DEFAULT NULL,
+        `1_3` double DEFAULT NULL,
+        `4_6` double DEFAULT NULL,
+        `7_9` double DEFAULT NULL,
+        `10_30` double DEFAULT NULL,
+        `30_60` double DEFAULT NULL,
+        `60` double DEFAULT NULL,
+        `id` int(11) NOT NULL AUTO_INCREMENT,
+        PRIMARY KEY (`id`)
+        ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8
 
 # 第二个表：session_random_extract表，存储我们的按时间比例随机抽取功能抽取出来的1000个session
 CREATE TABLE `session_random_extract` (
@@ -59,19 +60,20 @@ CREATE TABLE `top10_category_session` (
 
 # 第五张表：session_detail，用来存储随机抽取出来的session的明细数据、top10品类的session的明细数据
 CREATE TABLE `session_detail` (
-                                  `task_id` int(11) NOT NULL,
-                                  `user_id` int(11) DEFAULT NULL,
-                                  `session_id` varchar(255) DEFAULT NULL,
-                                  `page_id` int(11) DEFAULT NULL,
-                                  `action_time` varchar(255) DEFAULT NULL,
-                                  `search_keyword` varchar(255) DEFAULT NULL,
-                                  `click_category_id` int(11) DEFAULT NULL,
-                                  `click_product_id` int(11) DEFAULT NULL,
-                                  `order_category_ids` varchar(255) DEFAULT NULL,
-                                  `order_product_ids` varchar(255) DEFAULT NULL,
-                                  `pay_category_ids` varchar(255) DEFAULT NULL,
-                                  `pay_product_ids` varchar(255) DEFAULT NULL,
-                                  PRIMARY KEY (`task_id`)
+    `task_id` int(11) NOT NULL,
+    `user_id` int(11) DEFAULT NULL,
+    `session_id` varchar(255) DEFAULT NULL,
+    `page_id` int(11) DEFAULT NULL,
+    `action_time` varchar(255) DEFAULT NULL,
+    `search_keyword` varchar(255) DEFAULT NULL,
+    `click_category_id` int(11) DEFAULT NULL,
+    `click_product_id` int(11) DEFAULT NULL,
+    `order_category_ids` varchar(255) DEFAULT NULL,
+    `order_product_ids` varchar(255) DEFAULT NULL,
+    `pay_category_ids` varchar(255) DEFAULT NULL,
+    `pay_product_ids` varchar(255) DEFAULT NULL,
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 # 第六张表：task表，用来存储J2EE平台插入其中的任务的信息

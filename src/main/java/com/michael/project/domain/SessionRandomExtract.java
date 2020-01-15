@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class SessionRandomExtract {
 
+    private Long id;
     private Long taskId;
     private String sessionId;
     private String startTime;
