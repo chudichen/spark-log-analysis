@@ -1,13 +1,7 @@
 package com.michael.project.dao.factory;
 
-import com.michael.project.dao.ISessionAggStatDAO;
-import com.michael.project.dao.ISessionDetailDAO;
-import com.michael.project.dao.ISessionRandomExtractDAO;
-import com.michael.project.dao.ITaskDAO;
-import com.michael.project.dao.impl.SessionAggStatDAOImpl;
-import com.michael.project.dao.impl.SessionDetailDAOImpl;
-import com.michael.project.dao.impl.SessionRandomExtractDAOImpl;
-import com.michael.project.dao.impl.TaskDAOImpl;
+import com.michael.project.dao.*;
+import com.michael.project.dao.impl.*;
 
 /**
  * DAO工厂类
@@ -21,6 +15,7 @@ public class DAOFactory {
     private static final ISessionAggStatDAO SESSION_AGG_STAT_DAO = new SessionAggStatDAOImpl();
     private static final ISessionRandomExtractDAO SESSION_RANDOM_DAO = new SessionRandomExtractDAOImpl();
     private static final ISessionDetailDAO SESSION_DETAIL_DAO = new SessionDetailDAOImpl();
+    private static final ITop10CategoryDAO TOP_10_CATEGORY_DAO = new Top10CategoryDAOImpl();
 
     public static ITaskDAO getTaskDAO() {
         return TASK_DAO;
@@ -36,5 +31,9 @@ public class DAOFactory {
 
     public static ISessionDetailDAO getSessionDetailDAO() {
         return SESSION_DETAIL_DAO;
+    }
+
+    public static ITop10CategoryDAO getTop10CategoryDAO() {
+        return TOP_10_CATEGORY_DAO;
     }
 }

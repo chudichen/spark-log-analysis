@@ -12,14 +12,14 @@ import lombok.Data;
 public class SessionDetail {
 
     private Long id;
-    private long taskId;
-    private long userId;
+    private Long taskId;
+    private Long userId;
     private String sessionId;
-    private long pageId;
+    private Long pageId;
     private String actionTime;
     private String searchKeyword;
-    private long clickCategoryId;
-    private long clickProductId;
+    private Long clickCategoryId;
+    private Long clickProductId;
     private String orderCategoryIds;
     private String orderProductIds;
     private String payCategoryIds;
