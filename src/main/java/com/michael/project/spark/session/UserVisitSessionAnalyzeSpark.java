@@ -154,7 +154,12 @@ public class UserVisitSessionAnalyzeSpark {
          *
          */
 
-        getTop10Category(taskId, filteredSessionId2AggInfoRDD, sessionId2actionRDD);
+        // 获取top10热门品类
+        List<Tuple2<CategorySortKey, String>> top10CategoryList = getTop10Category(taskId, filteredSessionId2AggInfoRDD, sessionId2actionRDD);
+
+        // 获取top10活跃session
+        getTop10Session(sc, taskId, top10CategoryList, sessionId2actionRDD);
+
         sc.close();
     }
 
@@ -785,7 +790,7 @@ public class UserVisitSessionAnalyzeSpark {
      * @param filteredSessionId2AggInfoRDD RDD
      * @param sessionId2actionRDD RDD
      */
-    private static void getTop10Category(long taskId, JavaPairRDD<String, String> filteredSessionId2AggInfoRDD, JavaPairRDD<String, Row> sessionId2actionRDD) {
+    private static List<Tuple2<CategorySortKey, String>> getTop10Category(long taskId, JavaPairRDD<String, String> filteredSessionId2AggInfoRDD, JavaPairRDD<String, Row> sessionId2actionRDD) {
         /*
          * 第一步：获取符合条件的session访问过的所有品类
          */
@@ -906,6 +911,7 @@ public class UserVisitSessionAnalyzeSpark {
             top10CategoryDAO.insert(category);
         }
 
+        return top10CategoryList;
     }
 
     /**
@@ -1037,6 +1043,18 @@ public class UserVisitSessionAnalyzeSpark {
         });
 
         return tmpMapRDD;
+    }
+
+    /**
+     * 获取top10活跃session
+     *
+     * @param sc
+     * @param taskId
+     * @param top10CategoryList
+     * @param sessionId2actionRDD
+     */
+    private static void getTop10Session(JavaSparkContext sc, Long taskId, List<Tuple2<CategorySortKey, String>> top10CategoryList, JavaPairRDD<String, Row> sessionId2actionRDD) {
+
     }
 
 }
